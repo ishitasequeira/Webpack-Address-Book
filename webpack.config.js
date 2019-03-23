@@ -1,93 +1,60 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const devServerPort = 3002;
+let outDirectory = path.resolve(__dirname, 'dist');
+let outputFilename = '[name].js';
 
-let outputFileName = 'contacts',
-    env = process.env.WEBPACK_ENV,
-    plugins = [],
-    outPutConfig = {},
-    optimization = {},
-    outputFile,
-    devServerConfig;
-
-//Default plugins
-plugins.push(new webpack.HotModuleReplacementPlugin());//runtime changes
-plugins.push(new webpack.NamedModulesPlugin());
-
-//Environment specific settings
-if (env === 'prod') {
-    optimization.minimize = true;
-    outputFile = outputFileName + '.min.js';
-} else {
-    optimization.minimize = false;
-    outputFile = outputFileName + '.js';
-}
-
-//Output configuration
-outPutConfig.filename = outputFile;
-outPutConfig.path = path.resolve(__dirname, 'dist');
-outPutConfig.publicPath = '/dist/';
-outPutConfig.hotUpdateMainFilename = '[hash].json';
-outPutConfig.library = 'contacts';
-outPutConfig.libraryTarget = 'umd';
-outPutConfig.libraryExport = 'default';
-
-//Dev Server configuration
-devServerConfig = {
-    port: devServerPort,
-    publicPath: '/dist/',
-    hotOnly: true,
-    open: true,
-    openPage: './index.html',
-    public: 'localhost:' + devServerPort,
-    headers: {
-        "Access-Control-Allow-Origin": "*"
+module.exports = {
+    mode: 'production',
+    entry: './src/main.js',
+    output: {
+        filename: outputFilename,
+        path: outDirectory,
+        publicPath: '/'
     },
-    clientLogLevel: 'info',
-    stats: {
-        colors: true,
-        assets: true,
-        warnings: true
-    }
-};
-
-const config = {
-    entry: {
-        "contacts": './src/app.js'
+    devServer: {
+        port:3002,
+        contentBase: outDirectory
     },
-    devtool: 'source-map',
-    resolve: {
-        alias: {
-            Root: path.resolve(__dirname, 'src/'),
-            SCSS: path.resolve(__dirname, 'sass/')
-        }
-    },
-    output: outPutConfig,
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({
+            template: './index.html'
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        })
+    ],
     module: {
         rules: [{
-                test: /\.(js|jsx)$/,
-                exclude: /(node_modules)/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015']
-                    }
-                }]
-            },
-            {
-                test: /\.scss$/,
-                use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader" // translates CSS into CommonJS
-                }, {
-                    loader: "sass-loader" // compiles Sass to CSS
-                }]
-            }
-        ]
-    },
-    optimization: optimization,
-    plugins: plugins,
-    devServer: devServerConfig
+            test: /\.(js|jsx)$/,
+            exclude: /(node_modules)/,
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                    presets: ['es2015']
+                }
+            }]
+        },{
+            test: /\.scss$/,
+            use: [{
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                    publicPath: '../'
+                }
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
+            
+        
+        }]
+    }
+    
 };

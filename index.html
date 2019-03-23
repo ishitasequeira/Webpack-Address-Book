@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PhoneBook</title>
+  </head>
+  <body>
+    <div id="main">          
+      <div class="element custom">      
+        <div class="element-header">
+          <input id="search" type="text" placeholder="search" autocomplete="off">
+          <h2> Contacts</h2>
+          <a id="add-anchor" href="#" class="pull-right">
+            <img class="add-icon" id="AddContact" src="./images/ic_add_black_24px.svg" alt="Add Sticky">
+          </a>  
+        </div>
+        <div class="element-content" id="element-content">
+          <ul class="list" id="list">
+          </ul>
+          <div class="element-sidebar">
+            <a href="#">#</a>
+            <a href="#A1">A</a>
+            <a href="#B1">B</a>
+            <a href="#C1">C</a>
+            <a href="#D1">D</a>
+            <a href="#E1">E</a>
+            <a href="#F1">F</a>
+            <a href="#G1">G</a>
+            <a href="#H1">H</a>
+            <a href="#I1">I</a>
+            <a href="#J1">J</a>
+            <a href="#K1">K</a>
+            <a href="#L1">L</a>
+            <a href="#M1">M</a>
+            <a href="#N1">N</a>
+            <a href="#O1">O</a>
+            <a href="#P1">P</a>
+            <a href="#Q1">Q</a>
+            <a href="#R1">R</a>
+            <a href="#S1">S</a>
+            <a href="#T1">T</a>
+            <a href="#U1">U</a>
+            <a href="#V1">V</a>
+            <a href="#W1">W</a>
+            <a href="#X1">X</a>
+            <a href="#Y1">Y</a>
+            <a href="#Z1">Z</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h2>Create a new Contact</h2>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="left">
+                    <label>First Name : </label>
+                    <input class="addcontact" id="first_name" type="text"></input><br><br>
+                    <label>Contact No : </label> 
+                    <input class="addcontact" id="phonenumber" type="number"></input><br><br>
+                </div>
+                <div class="right">
+                    <label>Last Name : </label>
+                    <input class="addcontact" id="last_name" type="text"></input><br><br>
+                </div>
+                <div>
+                    <label>EmailId: </label>
+                    <input class="addcontact" id="emailID" type="email" size="50"></input><br><br>
+                    <input type="button" id="submit" value="Submit"></input>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+    </div>
+    
+    <div class="modal" id="contactCard">
+      <div class="modal-content">
+        <div class="modal-header">   
+          <label class="viewcontact" id="first" ></label>
+          <label class="viewcontact" id="last" ></label>
+        </div>
+        <div class="modal-body">
+          <br>
+          <label class="viewcontact" id="phoneNo" ></label><br><br>
+          <label class="viewcontact" id="addr" ></label><br><br>
+
+        </div>
+        
+      </div>
+    
+    </div>
+
+    <script src="/js/loadContact.js"></script>
+    <script src="/js/addContact.js"></script>
+
+  </body>
+</html>
