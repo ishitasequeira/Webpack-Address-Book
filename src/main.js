@@ -5,17 +5,24 @@ import { Observable, fromEvent,fromPromise} from 'rxjs/Rx';
 // import { map, debounceTime } from 'rxjs/operators';
 
 var modal = document.getElementById("addContactModal");
+var modal1 = document.getElementById("viewContactModal");
 let button = document.getElementById('addContact');
 let buttonClick$ = Observable.fromEvent(button, 'click');
 buttonClick$.subscribe(x => modal.style.display="block");
 
 
 // When the user clicks anywhere outside of the modal, close it
-window.addEventListener('click', (event) => {
+let windowClick$ = Observable.fromEvent(window, 'click');
+windowClick$.subscribe(x => hideModal(x));
+
+function hideModal(event) {
     if (event.target == modal) {
         modal.style.display="none";
     }
-});
+    if (event.target == modal1) {
+        modal1.style.display="none";
+    }
+};
 
 //retreiving data from server using fetchapi
 const fetch$ = Observable
