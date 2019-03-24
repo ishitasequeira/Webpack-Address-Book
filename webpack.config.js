@@ -54,7 +54,14 @@ module.exports = {
             }]
             
         
-        }]
+        },
+        {
+            test: /\.(png|jpg|gif)$/i,
+                loader: 'file-loader',
+                options: {name: 'images/[name].[ext]',
+                publicPath: '/'
+        }
+    }]
     }
     
 };
