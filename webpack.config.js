@@ -17,7 +17,7 @@ module.exports = {
         publicPath: '/'
     },
     devServer: {
-        port:3002,
+        port: 3002,
         contentBase: outDirectory
     },
     plugins: [
@@ -40,7 +40,7 @@ module.exports = {
                     presets: ['es2015']
                 }
             }]
-        },{
+        }, {
             test: /\.scss$/,
             use: [{
                 loader: MiniCssExtractPlugin.loader,
@@ -52,16 +52,17 @@ module.exports = {
             }, {
                 loader: "sass-loader" // compiles Sass to CSS
             }]
-            
-        
+
+
         },
         {
             test: /\.(png|jpg|gif)$/i,
-                loader: 'file-loader',
-                options: {name: 'images/[name].[ext]',
+            loader: 'file-loader',
+            options: {
+                name: 'images/[name].[ext]',
                 publicPath: '/'
-        }
-    }]
+            }
+        }]
     }
-    
+
 };

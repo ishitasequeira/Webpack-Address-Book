@@ -38,72 +38,72 @@ function addContact(event) {
     var phnum = document.getElementById("phonenumber").value;
     var email = document.getElementById("emailID").value;
     console.log(fname + lname);
-    if (fname != null && phnum != null && fname != undefined && phnum != undefined && fname != "" && phnum != ""){
+    if (fname != null && phnum != null && fname != undefined && phnum != undefined && fname != "" && phnum != "") {
 
         var present = false;
         var msg = "";
-        for(var k = 0; k < localJSON.length; k++){
-            if(localJSON[k].FirstName == fname) {
+        for (var k = 0; k < localJSON.length; k++) {
+            if (localJSON[k].FirstName == fname) {
                 present = true;
                 msg = "First Name already present!";
                 break;
             }
-            if(localJSON[k].PhoneNumber == phnum){
+            if (localJSON[k].PhoneNumber == phnum) {
                 present = true;
                 msg = "Phone Number already saved under another contact!";
                 break;
             }
         }
 
-        if(!present){
-        const add$ = Observable
-            .from(fetch("http://localhost:3000/contacts",
-                {
-                    headers: { "Content-Type": "application/json; charset=utf-8" },
-                    method: 'POST',
-                    body: JSON.stringify({
-                        FirstName: fname,
-                        LastName: lname,
-                        PhoneNumber: phnum,
-                        EmailId: email
-                    })
+        if (!present) {
+            const add$ = Observable
+                .from(fetch("http://localhost:3000/contacts",
+                    {
+                        headers: { "Content-Type": "application/json; charset=utf-8" },
+                        method: 'POST',
+                        body: JSON.stringify({
+                            FirstName: fname,
+                            LastName: lname,
+                            PhoneNumber: phnum,
+                            EmailId: email
+                        })
 
 
-                })).flatMap(response => response.json()); // converting the data into rsesponse.json
-        // subscribed to add observable
-        add$.subscribe(x => {
-            //added the new contact in local json
-            localJSON.push(x);
-            var li;
-            //cleared the list present
-            var lis = document.querySelectorAll('#list li');
-            for (var i = 0; li = lis[i]; i++) {
-                li.parentNode.removeChild(li);
-            }
-            //called the function to  print the data on the main page
-            printData(localJSON);
-        });
-        modal.style.display = "none";
-        clearValue(); 
-    
-    }else{
+                    })).flatMap(response => response.json()); // converting the data into rsesponse.json
+            // subscribed to add observable
+            add$.subscribe(x => {
+                //added the new contact in local json
+                localJSON.push(x);
+                var li;
+                //cleared the list present
+                var lis = document.querySelectorAll('#list li');
+                for (var i = 0; li = lis[i]; i++) {
+                    li.parentNode.removeChild(li);
+                }
+                //called the function to  print the data on the main page
+                printData(localJSON);
+            });
+            modal.style.display = "none";
+            clearValue();
+
+        } else {
+            var modalBody = document.getElementById('modal-body');
+            var h3 = modalBody.querySelector("h3");
+            if (h3 != null)
+                modalBody.removeChild(h3);
+            var l1 = document.createElement("h3");
+            l1.innerHTML = msg;
+            l1.style.color = "red";
+            modalBody.append(l1);
+        }
+    } else {
         var modalBody = document.getElementById('modal-body');
         var h3 = modalBody.querySelector("h3");
-        if(h3 != null)
+        if (h3 != null)
             modalBody.removeChild(h3);
-        var l1 =document.createElement("h3");
-        l1.innerHTML=msg;
-        l1.style.color= "red";
-        modalBody.append(l1);
-    }
-    }else{
-        var modalBody = document.getElementById('modal-body');
-        var h3 = modalBody.querySelector("h3");
-        if(h3 != null)
-            modalBody.removeChild(h3);
-        var l1 =document.createElement("h3");
-        l1.innerHTML="Please fill in the the First name and Phone number";
-        l1.style.color= "red";
+        var l1 = document.createElement("h3");
+        l1.innerHTML = "Please fill in the the First name and Phone number";
+        l1.style.color = "red";
         modalBody.append(l1);
     }
 
@@ -127,9 +127,25 @@ function printData(x) {
     x.sort((a, b) => {
         return a.FirstName <= b.FirstName ? -1 : 1;
     })
+
+    
+    var pos = 0;
+    var currentchar = "A";
+
     for (var i = 0; i < x.length; i++) {
         const row = document.createElement("li");
+        // to set the id of li
+        if (currentchar == x[i].FirstName.charAt(0).toUpperCase()) {
+            pos++;
+        } else {
+            currentchar = x[i].FirstName.charAt(0).toUpperCase();
+            pos = 1;
+        }
+
+        row.id = currentchar + pos;
+
         const rowLabel = document.createElement("div");
+
         rowLabel.innerHTML = x[i].FirstName + " " + x[i].LastName;
         rowLabel.id = x[i]._id;
         row.append(rowLabel);
