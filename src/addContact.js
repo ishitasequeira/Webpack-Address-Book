@@ -1,7 +1,13 @@
 import { Observable } from 'rxjs/Rx';
 import { printData, clearValue } from 'Root/dataOperations';
 
-// addContact  function
+/**
+ * Thre below fumction checks if the name(fname and lname is present) or phoneNumber is already present 
+ *  @desc to addContact  function
+ * @param {localJSON} localJSON localJSON file
+ * @return {Function} The error handler function.
+ */
+
 exports.addContact = function (localJSON) {
     var modal = document.getElementById("addContactModal");
     var fname = document.getElementById("first_name").value;
@@ -39,19 +45,33 @@ exports.addContact = function (localJSON) {
                             PhoneNumber: phnum,
                             EmailId: email
                         })
-                    })).flatMap(response => response.json()); // converting the data into rsesponse.json
-            // subscribed to add observable
+                    /** 
+                    * @desc converting the data into rsesponse.json
+                    * */
+                    })).flatMap(response => response.json());  
+
+
+            /** 
+             * @desc to  subscribed to add observable
+             * */
             add$.subscribe({
                 next: x => {
-                    //added the new contact in local json
+                    /** 
+                    * @desc added the new contact in local json
+                    * */
                     localJSON.push(x);
                     var li;
-                    //cleared the list present
+                    /** 
+                    * @desc cleared the list present
+                    * */
                     var lis = document.querySelectorAll('#list li');
                     for (var i = 0; li = lis[i]; i++) {
                         li.parentNode.removeChild(li);
                     }
-                    //called the function to  print the data on the main page
+                    /** 
+                    * @desc called the function to  print the data on the main page
+                    * */
+                    
                     printData(localJSON);
                 }, complete: () => { console.log("Completing post contact subscription") }
             });
@@ -69,7 +89,10 @@ exports.addContact = function (localJSON) {
             modalBody.append(l1);
         }
     } else {
-        // added logic to show error if the mandatory fields are not filled
+        
+        /** 
+         * @desc added logic to show error if the mandatory fields are not filled
+        * */
         var modalBody = document.getElementById('modal-body');
         var h3 = modalBody.querySelector("h3");
         if (h3 != null)
