@@ -20,6 +20,12 @@ module.exports = {
         port: 3002,
         contentBase: outDirectory
     },
+    resolve: {
+        alias: {
+            Root: path.resolve(__dirname, 'src/'),
+            SCSS: path.resolve(__dirname, 'scss/')
+        }
+    },
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
