@@ -18,7 +18,9 @@ module.exports = {
     },
     devServer: {
         port: 3002,
-        contentBase: outDirectory
+        contentBase: outDirectory,
+        open:true,
+        openPage: './index.html'
     },
     resolve: {
         alias: {

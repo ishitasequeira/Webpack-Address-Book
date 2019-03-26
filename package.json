@@ -45,6 +45,8 @@
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.4.0"
   }

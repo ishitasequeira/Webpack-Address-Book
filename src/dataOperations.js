@@ -1,4 +1,7 @@
-exports.clearValue = function() {
+/**
+ * @desc to clear  the value of the new contact modal.(First name,last name, phone number and email id)
+ */
+exports.clearValue = function () {
     document.getElementById("first_name").value = "";
     document.getElementById("last_name").value = "";
     document.getElementById("phonenumber").value = "";
@@ -9,14 +12,23 @@ exports.clearValue = function() {
         modalBody.removeChild(h3);
 }
 
-exports.printData = function(x) {
+
+/**
+ * Throws error if error object is present.
+ *
+ * @param {x} x localJSON 
+ * @return {Function} The error handler function.
+ */
+exports.printData = function (x) {
     x.sort((a, b) => {
         return a.FirstName <= b.FirstName ? -1 : 1;
     })
     var pos = 0, currentchar = "A";
     for (var i = 0; i < x.length; i++) {
         const row = document.createElement("li");
-        // to set the id of li
+        /**
+        * @desc The below if loop is to set the id of li
+        */
         if (currentchar == x[i].FirstName.charAt(0).toUpperCase()) {
             pos++;
         } else {
