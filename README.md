@@ -6,7 +6,7 @@ to add event event listener to connect the server side code.
 
 ## The way to run the form in proper order is described below.
 1. Open git bash
-2. Clone the repository on your desktop by executing the command "git clone https://github.com/neu-mis-info6150-spring-2019/assignment-4-ishitasequeira.git" .
+2. Clone the repository on your desktop by executing the command "git clone https://github.com/neu-mis-info6150-spring-2019/assignment-7-ishitasequeira.git".
 3. Navigate the project dir to cd assignment-4-ishitasequeira
 4. Run npm install.
 5. Build
