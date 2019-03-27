@@ -12,7 +12,7 @@ to add event event listener to connect the server side code.
 5. Build
 6. Default build mode is production. 
 
-#To build the app
+# To build the app
 1. run npm run build.
 2. Launch the app by opening the file ./dist/index.html in a browser.
 3. Development Server
