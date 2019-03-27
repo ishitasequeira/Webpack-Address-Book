@@ -3,18 +3,17 @@ import { printData, clearValue } from 'Root/dataOperations';
 
 /**
  * Thre below fumction checks if the name(fname and lname is present) or phoneNumber is already present 
- *  @desc to addContact  function
- * @param {localJSON} localJSON localJSON file
+ * @desc to addContact  function
+ * @param {localJSON}   - localJSON file
  * @return {Function} The error handler function.
  */
-
 exports.addContact = function (localJSON) {
     var modal = document.getElementById("addContactModal");
     var fname = document.getElementById("first_name").value;
     var lname = document.getElementById("last_name").value;
     var phnum = document.getElementById("phonenumber").value;
     var email = document.getElementById("emailID").value;
-    console.log(fname + lname);
+   /** @desc to avoid  wrong inputs from going forward */
     if (fname != null && lname != null && phnum != null && fname != undefined
         && lname != undefined && phnum != undefined && fname != "" && lname != "" && phnum != "") {
 
@@ -34,6 +33,10 @@ exports.addContact = function (localJSON) {
         }
 
         if (!present) {
+
+            /**
+             * @desc observable to fetch api for POST method
+             */
             const add$ = Observable
                 .from(fetch("http://localhost:3000/contacts",
                     {

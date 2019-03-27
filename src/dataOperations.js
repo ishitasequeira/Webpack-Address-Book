@@ -1,4 +1,5 @@
 /**
+ * @exports clearValue function
  * @desc to clear  the value of the new contact modal.(First name,last name, phone number and email id)
  */
 exports.clearValue = function () {
@@ -14,10 +15,9 @@ exports.clearValue = function () {
 
 
 /**
- * Throws error if error object is present.
- *
- * @param {x} x localJSON 
- * @return {Function} The error handler function.
+ * @exports printData function
+ * @desc function to print data on the page
+ * @param x - localJSON object
  */
 exports.printData = function (x) {
     x.sort((a, b) => {
