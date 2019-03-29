@@ -21,7 +21,7 @@ exports.clearValue = function () {
  */
 exports.printData = function (x) {
     x.sort((a, b) => {
-        return a.FirstName.charAt(0).toUpperCase() <= b.FirstName.charAt(0).toUpperCase() ? -1 : 1;
+        return a.FirstName.toUpperCase() <= b.FirstName.toUpperCase() ? -1 : 1;
     })
     var pos = 0, currentchar = "A";
     for (var i = 0; i < x.length; i++) {
