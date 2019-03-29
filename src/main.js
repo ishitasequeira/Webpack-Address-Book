@@ -73,8 +73,7 @@ function hideModal(event) {
 
 /** @desc fetch api observable for GET method  */
 const fetch$ = Observable
-    .from(fetch("http://localhost:3000/contacts"))
-    .flatMap(response => response.json());
+    .from(fetch("http://localhost:3000/contacts")).flatMap(response => response.json());
 
 readData();
 
@@ -86,6 +85,7 @@ function readData() {
             localJSON = x;
             printData(localJSON);
         },
+        error:()=>{console.log("Connection has not been  created")},
         complete: () => { console.log("Completing read data subscription") }
     });
 }

@@ -4,8 +4,8 @@ import { printData, clearValue } from 'Root/dataOperations';
 /**
  * Thre below fumction checks if the name(fname and lname is present) or phoneNumber is already present 
  * @desc to addContact  function
- * @param {localJSON}   - localJSON file
- * @return {Function} The error handler function.
+ * @param localJSON   - localJSON file
+ * @return function -The error handler function.
  */
 exports.addContact = function (localJSON) {
     var modal = document.getElementById("addContactModal");
@@ -28,6 +28,22 @@ exports.addContact = function (localJSON) {
             if (localJSON[k].PhoneNumber == phnum) {
                 present = true;
                 msg = "Phone Number already saved under another contact!";
+                break;
+            }
+            var phoneno = /^\(?([1-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            if(!phnum.match(phoneno)){
+                present = true;
+                msg = "Please enter a 10 digit valid phone number!"
+                break;
+            }
+            if(email == null || email==undefined || email == ""){
+                email= "";
+                continue;
+            }
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!email.match(mailformat)){
+                present = true;
+                msg = "Please enter a valid email-id!"
                 break;
             }
         }
@@ -76,7 +92,9 @@ exports.addContact = function (localJSON) {
                     * */
                     
                     printData(localJSON);
-                }, complete: () => { console.log("Completing post contact subscription") }
+                    
+                },error:()=>{console.log("Connection has not been  created")}
+                , complete: () => { console.log("Completing post contact subscription") }
             });
             modal.style.display = "none";
             clearValue();
