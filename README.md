@@ -13,4 +13,4 @@ HTML SCSS used as the CSS pre-processor Webpack used to bundle the SCSS library 
 ## To build and run the application
 1. To build the application, execute "npm run build"
 2. Run application server using "npm start" or "npm run start"
-3. You can launch the applcation at http://localhost:3002/contacts
+3. You can launch the applcation at http://localhost:3002/
