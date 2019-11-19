@@ -1,4 +1,4 @@
-# Assignment 7: Asynchronous JavaScript: Address book/Contact app
+# Asynchronous JavaScript: Address book/Contact app
 
 ## Technologies :
 HTML SCSS used as the CSS pre-processor Webpack used to bundle the SCSS library into the project, RXJS to add event event listener to connect the server side code.
